@@ -1,0 +1,34 @@
+{% extends "./base.html" %}
+<!--현재 디렉토리에 있는 base.html 파일을 상속받음 -->
+{% block contents %}
+<div class="container">
+<div class="row mt-5">
+    <div class="col-12 text-center">
+        <h1>로그인</h1>
+    </div>
+</div>
+<div class="row mt-5">
+    <div class="col-12">
+        {{ error }}
+    </div>
+</div>
+<div class="row mt-5">
+    <div class="col-12">
+        <form method="POST" action=".">
+            {% csrf_token %}  <!-- 장고에서 크로스 도메인을 막기 위해 암호화된 키를 검증-->
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    <input type="{{ field.field.widget.input_type }}" class="form-control" id="{{ field.id_for_label }}"
+                           placeholder="{{ field.label }}" name="{{ field.name }}" />
+                </div>
+                {% if field.errors %}
+                    <span style="color : red">{{ field.errors }}</span>
+                {% endif %}
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">로그인</button>
+        </form>
+    </div>
+</div>
+</div>
+{% endblock %}
