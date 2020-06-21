@@ -1,0 +1,27 @@
+{% extends "./base.html" %}
+
+{% block contents %}
+<div class="row mt-5">
+    <div class="col-12">
+        <h1>Welcome</h1>
+    </div>
+</div>
+    <div class="row mt-5">
+        <div class="col-12">
+            <div style="padding-top: 10px">
+                <a class="btn btn-dark" href="{% url 'send_to_login' %}"> Login </a>
+            </div>
+        </div>
+        <div class="col-12">
+            <div style="padding-top: 10px">
+                <a class="btn btn-light" href="{% url 'send_to_board' %}"> To Board </a>
+            </div>
+        </div>
+        <div class="col-12">
+            <div style="padding-top: 10px">
+                <a class="btn btn-danger" href="{% url 'send_to_register' %}"> Register </a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

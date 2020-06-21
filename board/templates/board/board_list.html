@@ -1,0 +1,52 @@
+{% extends "./base.html" %}
+{% block contents %}
+<div class="row mt-5">
+    <div class="col-12">
+        <table class="table table-light">
+            <thead class="thead-light">
+                <tr>
+                    <th>#</th>
+                    <th>제목</th>
+                    <th>아이디</th>
+                    <th>일시</th>
+                </tr>
+            </thead>
+            <tbody class="text-dark">
+            {% for board in pages %}
+            <tr>
+                <th>{{ board.id }}</th>
+                <th><a class="btn btn" href="{% url 'board_detail' pk=board.id %}">{{ board.title }}</a></th>
+                <th>{{ board.writer }}</th>
+                <th>{{ board.registered_dttm }}</th>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <a class="btn btn-primary" href="{% url 'board_write' %}">글쓰기</a>
+    </div>
+</div>
+    <div class="row">
+    <div class="col-12" style="padding-top: 15px">
+        <a class="btn btn-primary" href="{% url 'send_to_home' %}">돌아가기</a>
+    </div>
+    </div>
+
+    {% if pages.has_previous %}
+        <a href="?page=1">Front</a>
+        <a href="?page={{ pages.previous_page_number }}"> < </a>
+    {% endif %}
+    {% for i in page_range %}
+        <a href="?page={{ i }}">{{ i }}</a>
+    {% endfor %}
+
+    {% if pages.has_next %}
+        <a href="?page={{ pages.next_page_number }}"> > </a>
+        <a href="?page={{ pages.paginator.num_pages }}"> Last </a>
+    {% endif %}
+
+
+{% endblock %}
